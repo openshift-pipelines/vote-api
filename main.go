@@ -5,19 +5,24 @@ import (
 	"net/http"
 )
 
+var inMemoryStore = make(map[string]int)
+var redirectURL = "http://0.0.0.0:9000"
+
 func setupRouter() *gin.Engine {
 	r := gin.Default()
 
 	r.GET("/vote", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"votes": 100,
-		})
+		payload := gin.H{}
+		for k, v := range inMemoryStore {
+			payload[k] = v
+		}
+		c.JSON(http.StatusOK, payload)
 	})
 
 	r.POST("/vote", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"votes": 100,
-		})
+		name := c.PostForm("vote")
+		inMemoryStore[name]++
+		c.Redirect(301, redirectURL)
 	})
 	return r
 }
