@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: voting-api
+  name: voting-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: voting-api
+  template:
+    metadata:
+      labels:
+        app: voting-api
+    spec:
+      containers:
+        - image: nikhilvep/voting-api:latest
+          name: voting-api
+          ports:
+            - containerPort: 8080
