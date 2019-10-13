@@ -2,8 +2,9 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/gin-gonic/gin"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 var inMemoryStore = make(map[string]string)
@@ -17,7 +18,7 @@ func setupRouter() *gin.Engine {
 		voteA := 0
 		voteB := 0
 		for _, v := range inMemoryStore {
-			switch v{
+			switch v {
 			case "a":
 				voteA++
 			case "b":
@@ -45,5 +46,5 @@ func setupRouter() *gin.Engine {
 
 func main() {
 	r := setupRouter()
-	r.Run(":8080")
+	r.Run(":9000")
 }
