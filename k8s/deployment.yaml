@@ -15,7 +15,7 @@ spec:
         app: api
     spec:
       containers:
-        - image: voting-api:latest
+        - image: api:latest
           name: api
           ports:
             - containerPort: 9000
