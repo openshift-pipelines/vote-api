@@ -15,7 +15,7 @@ spec:
         app: api
     spec:
       containers:
-        - image: quay.io/sthaha/voting-api:latest
+        - image: voting-api:latest
           name: api
           ports:
             - containerPort: 9000
