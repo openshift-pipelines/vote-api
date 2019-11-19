@@ -1,16 +1,11 @@
-FROM golang:1.13 as builder
+FROM golang:alpine as builder
 
 WORKDIR /build
 ADD . /build/
 
+RUN GOOS=linux GARCH=amd64 CGO_ENABLED=0 go build -o api-server .
 
-ENV GOOS=linux GARCH=amd64 CGO_ENABLED=0
-RUN go build -o api-server .
-
-FROM alpine:3.7
-
-#RUN adduser -S -D -H -h /app appuser
-#USER appuser
+FROM scratch
 
 WORKDIR /app
 COPY --from=builder /build/api-server /app/api-server
