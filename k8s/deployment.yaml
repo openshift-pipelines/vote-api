@@ -2,20 +2,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: api
-  name: api
+    app: voting-api
+  name: voting-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: api
+      app: voting-api
   template:
     metadata:
       labels:
-        app: api
+        app: voting-api
     spec:
       containers:
         - image: quay.io/sthaha/voting-api:latest
+          imagePullPolicy: Always
           name: api
           ports:
             - containerPort: 9000
+              protocol: TCP
