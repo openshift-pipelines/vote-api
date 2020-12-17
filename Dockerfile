@@ -1,4 +1,4 @@
-FROM quay.io/openshift-pipeline/golang:alpine as builder
+FROM registry.access.redhat.com/ubi8/go-toolset:1.14.12 as builder
 
 WORKDIR /build
 ADD . /build/
