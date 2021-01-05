@@ -1,9 +1,9 @@
-FROM golang:alpine as builder
+FROM registry.access.redhat.com/ubi8/go-toolset:1.14.12 as builder
 
 WORKDIR /build
 ADD . /build/
 
-RUN GOOS=linux GARCH=amd64 CGO_ENABLED=0 go build -mod=vendor -o api-server .
+RUN export GARCH="$(uname -m)" && if [[ ${GARCH} == "x86_64" ]]; then export GARCH="amd64"; fi && GOOS=linux GOARCH=${GARCH} CGO_ENABLED=0 go build -mod=vendor -o api-server .
 
 FROM scratch
 
